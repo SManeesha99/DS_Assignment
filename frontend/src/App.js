@@ -50,6 +50,8 @@ import RegisterSeller from "./modules/users/components/registerSeller";
 import SellerDashboard from './modules/dashboards/components/seller/SellerDashboard';
 import AdminDashboard from "./modules/dashboards/components/admin/AdminDashboard";
 import TrackOrder from "./modules/dashboards/components/admin/TrackOrder";
+import AddItems from "./modules/items/components/AddItem";
+import UpdateItems from "./modules/items/components/UpdateItems";
 
 const App = () => {
   return (
@@ -81,6 +83,8 @@ const App = () => {
           <Route path='/seller-dashboard' element={<SellerDashboard/>}/>
           <Route path='/admin-dashboard' element={<AdminDashboard/>}/>
           <Route path='/track-order' element={<TrackOrder/>}/>
+          <Route path='/additem' element={<AddItems/>}/>
+          <Route path='/updateitem/:id' element={<UpdateItems/>}/>
         </Routes>
       </div>
     </Router>
