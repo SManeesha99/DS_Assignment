@@ -12,7 +12,7 @@ export default function ItemStore() {
         <div className="bg-light py-3">
           <div className="container">
             <div className="row">
-              <div className="col-md-12 mb-0"><NavLink to='/homepage' style={{ textDecoration: 'none' }}>Home</NavLink> <span className="mx-2 mb-0">/</span> <strong className="text-black">Store</strong></div>
+              <div className="col-md-12 mb-0"><NavLink to='/homebuyer' style={{ textDecoration: 'none' }}>Home</NavLink> <span className="mx-2 mb-0">/</span> <strong className="text-black">Store</strong></div>
             </div>
           </div>
         </div>
