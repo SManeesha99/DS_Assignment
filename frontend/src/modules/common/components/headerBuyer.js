@@ -17,13 +17,13 @@ export default function HeaderBuyer() {
           <div className="d-flex align-items-center justify-content-between">
             <div className="logo">
               <div className="site-logo">
-                <a href="/homepage" className="js-logo-clone" style={{textDecoration: 'none'}}>Thambapanni</a>
+                <a href="/homebuyer" className="js-logo-clone" style={{textDecoration: 'none'}}>Thambapanni</a>
               </div>
             </div>
             <div className="main-nav d-none d-lg-block">
               <nav className="site-navigation text-right text-md-center" role="navigation">
                 <ul className="site-menu js-clone-nav d-none d-lg-block">
-                  <li className="active"><NavLink to='/homepage'>Home</NavLink></li>
+                  <li className="active"><NavLink to='/homebuyer'>Home</NavLink></li>
                   <li><NavLink to='/store'>Store</NavLink></li>
                   {/* <li className="has-children">
                     <a href="#">Option</a>
