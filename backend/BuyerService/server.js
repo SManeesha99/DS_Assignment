@@ -92,7 +92,7 @@ connection.once("open",()=>{
 
 
 app.listen(PORT,()=>{
-    console.log(`Buyer Service is up and running on port ${PORT} ✨`);
+    console.log(`Item Service is up and running on port ${PORT} ✨`);
 })
 
 
