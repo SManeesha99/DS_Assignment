@@ -42,8 +42,11 @@ import ThankYou from "./modules/common/components/ThankYou";
 import About from "./modules/common/components/About";
 import Contact from "./modules/common/components/Contact";
 import SellerAdminSignIn from "./modules/users/components/SellerAdminSignIn";
-import loginBuyer from "./modules/users/components/loginBuyer";
-import registerBuyer from "./modules/users/components/registerBuyer";
+import SelectLogin from "./modules/users/components/selectlogin";
+import SelectRegister from "./modules/users/components/selectregister";
+import LoginBuyer from "./modules/users/components/loginBuyer";
+import RegisterBuyer from "./modules/users/components/registerBuyer";
+import RegisterSeller from "./modules/users/components/registerSeller";
 import SellerDashboard from './modules/dashboards/components/seller/SellerDashboard';
 import AdminDashboard from "./modules/dashboards/components/admin/AdminDashboard";
 import TrackOrder from "./modules/dashboards/components/admin/TrackOrder";
@@ -57,11 +60,11 @@ const App = () => {
           <Route path='/:id' />
           <Route path='/auth' element={<BasicAuth />} /> */}
           <Route exact path="/" element={<Homepage />} />
-          <Route exact path="/homebuyer" element={<HomeBuyer />} />
           <Route element={<HeaderBuyer />} />
           <Route element={<NotRegHeader />} />
           <Route element={<BottomBanners />} />
           <Route element={<Footer />} />
+          <Route path="/homebuyer" element={<HomeBuyer />} />
           <Route path="/store" element={<ItemStore />} />
           <Route path="/single-item" element={<SingleItem />} />
           <Route path="/cart" element={<Cart />} />
@@ -69,9 +72,12 @@ const App = () => {
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/selectlogin" element={<SelectLogin />} />
+          <Route path="/selectregister" element={<SelectRegister />} />
           <Route path="/seller-login" element={<SellerAdminSignIn />} />
-          <Route path="/buyer-login" element={<loginBuyer />} />
-          <Route path="/buyer-register" element={<registerBuyer />} />
+          <Route path="/buyer-login" element={<LoginBuyer />} />
+          <Route path="/buyer-register" element={<RegisterBuyer />} />
+          <Route path="/seller-register" element={<RegisterSeller />} />
           <Route path='/seller-dashboard' element={<SellerDashboard/>}/>
           <Route path='/admin-dashboard' element={<AdminDashboard/>}/>
           <Route path='/track-order' element={<TrackOrder/>}/>

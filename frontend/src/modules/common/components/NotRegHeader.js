@@ -17,18 +17,18 @@ export default function NotRegHeader() {
           <div className="d-flex align-items-center justify-content-between">
             <div className="logo">
               <div className="site-logo">
-                <a href="/homepage" className="js-logo-clone" style={{textDecoration: 'none'}}>Thambapanni</a>
+                <a href="/" className="js-logo-clone" style={{textDecoration: 'none'}}>Thambapanni</a>
               </div>
             </div>
             <div className="main-nav d-none d-lg-block">
               <nav className="site-navigation text-right text-md-center" role="navigation">
                 <ul className="site-menu js-clone-nav d-none d-lg-block">
-                  <li className="active"><NavLink to='/homepage'>Home</NavLink></li>
+                  <li className="active"><NavLink to='/'>Home</NavLink></li>
                   <li><NavLink to='/store'>Store</NavLink></li>
                   <li><NavLink to='/about'>About</NavLink></li>
                   <li><NavLink to='/contact'>Contact</NavLink></li>
-                  <li><NavLink to='/contact'>Sign In</NavLink></li>
-                  <li><NavLink to='/about'>Sign Out</NavLink></li>
+                  <li><NavLink to='/selectlogin'>Sign In</NavLink></li>
+                  <li><NavLink to='/selectregister'>Sign Up</NavLink></li>
                 </ul>
               </nav>
             </div>
