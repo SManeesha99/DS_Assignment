@@ -11,14 +11,6 @@ const Item = require('../models/ItemService');
 // @access Public
 router.get('/test', (req, res) => res.send('item route testing!'));
 
-// @route POST api/items
-// @description add/save item
-// @access Public
-router.post("/send", (req, res) => {
-    Item.create(req.body)
-      .then((item) => res.json({ msg: "add to item successfully" }))
-      .catch((err) => res.status(400).json({ error: "Unable to add" }));
-  });
 
 
 // @route GET api/items
@@ -42,7 +34,7 @@ router.get('/:id', (req, res) => {
 // @route POST api/items
 // @description add/save item
 // @access Public
-router.post('/', (req, res) => {
+router.post('/send', (req, res) => {
   Item.create(req.body)
     .then(item => res.json({ msg: 'Item added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this item' }));

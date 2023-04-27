@@ -21,6 +21,11 @@ mongoose.connect(URL,{
 
 });
 
+
+// routes
+const items = require("./routes/Oder"); //use this when implementing routes
+app.use("/api/Order", items);
+
 const connection = mongoose.connection;
 
 connection.once("open",()=>{
