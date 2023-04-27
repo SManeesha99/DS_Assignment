@@ -23,8 +23,8 @@ mongoose.connect(URL,{
 
 
 // routes
-const items = require("./routes/Oder"); //use this when implementing routes
-app.use("/api/Order", items);
+const oder = require("./routes/Oder"); //use this when implementing routes
+app.use("/api/Oder", oder);
 
 const connection = mongoose.connection;
 
@@ -34,7 +34,7 @@ connection.once("open",()=>{
 
 
 app.listen(PORT,()=>{
-    console.log(`Seller Service is up and running on port ${PORT} ✨`);
+    console.log(`Oder Service is up and running on port ${PORT} ✨`);
 })
 
 

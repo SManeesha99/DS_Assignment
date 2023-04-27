@@ -21,6 +21,10 @@ mongoose.connect(URL,{
 
 });
 
+// routes
+const review = require("./routes/Review"); //use this when implementing routes
+app.use("/api/Review", review);
+
 const connection = mongoose.connection;
 
 connection.once("open",()=>{
@@ -29,7 +33,7 @@ connection.once("open",()=>{
 
 
 app.listen(PORT,()=>{
-    console.log(`Delivery Service is up and running on port ${PORT} ✨`);
+    console.log(`Review Rate Service is up and running on port ${PORT} ✨`);
 })
 
 
