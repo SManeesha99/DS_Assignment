@@ -1,161 +1,64 @@
 import React from 'react'
 import './SellerDashboard.css'
+import { NavLink } from 'react-router-dom'
 import DashboardHeader from "../../../common/components/DashboardHeader"
 import SellerSideNav from '../../../common/components/SellerSideNav'
 
 export default function SellerDashboard() {
   return (
     <div>
+      <div className="site-wrap ">
       <DashboardHeader />
-      <div className="container-fluid">
-        <div className="row">
-          <SellerSideNav />
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <h1 className="h2">Seller Dashboard</h1>
-              <div className="btn-toolbar mb-2 mb-md-0">
-                <div className="btn-group me-2">
-                  <button type="button" className="btn btn-sm btn-outline-secondary">Share</button>
-                  <button type="button" className="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                  <span data-feather="calendar"></span>
-                  This week
-                </button>
+       <SellerSideNav />
+        <div className="bg-light py-3 ">
+        </div>
+        <div className="site-section dashboardContainer">
+          <div className="container">
+            <div className="row">
+            </div>
+            <div className="row">
+              <div className="col-sm-6 col-lg-4 text-center item mb-4">
+                <a href="/SellerSingleProduct"> <img src="./assets/images/product_01.png" alt="Image" /></a>
+                <h3 className="text-dark"><a href="/SellerSingleProduct" style={{ textDecoration: 'none' }}>Bioderma</a></h3>
+                <p className="price"><del>95.00</del> &mdash; $55.00</p>
+              </div>
+              <div className="col-sm-6 col-lg-4 text-center item mb-4">
+                <a href="/SellerSingleProduct"> <img src="./assets/images/product_01.png" alt="Image" /></a>
+                <h3 className="text-dark"><a href="/SellerSingleProduct" style={{ textDecoration: 'none' }}>Bioderma</a></h3>
+                <p className="price"><del>95.00</del> &mdash; $55.00</p>
+              </div>
+              <div className="col-sm-6 col-lg-4 text-center item mb-4">
+                <a href="/SellerSingleProduct"> <img src="./assets/images/product_01.png" alt="Image" /></a>
+                <h3 className="text-dark"><a href="/SellerSingleProduct" style={{ textDecoration: 'none' }}>Bioderma</a></h3>
+                <p className="price"><del>95.00</del> &mdash; $55.00</p>
+              </div>
+              <div className="col-sm-6 col-lg-4 text-center item mb-4">
+                <a href="/SellerSingleProduct"> <img src="./assets/images/product_01.png" alt="Image" /></a>
+                <h3 className="text-dark"><a href="/SellerSingleProduct" style={{ textDecoration: 'none' }}>Bioderma</a></h3>
+                <p className="price"><del>95.00</del> &mdash; $55.00</p>
+              </div>
+              <div className="col-sm-6 col-lg-4 text-center item mb-4">
+                <a href="/SellerSingleProduct"> <img src="./assets/images/product_01.png" alt="Image" /></a>
+                <h3 className="text-dark"><a href="/SellerSingleProduct" style={{ textDecoration: 'none' }}>Bioderma</a></h3>
+                <p className="price"><del>95.00</del> &mdash; $55.00</p>
               </div>
             </div>
-
-            {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}
-
-            <h4>Item Management</h4>
-            <div className="table-responsive">
-              <table className="table table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Header</th>
-                    <th scope="col">Header</th>
-                    <th scope="col">Header</th>
-                    <th scope="col">Header</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1,001</td>
-                    <td>random</td>
-                    <td>data</td>
-                    <td>placeholder</td>
-                    <td>text</td>
-                  </tr>
-                  <tr>
-                    <td>1,002</td>
-                    <td>placeholder</td>
-                    <td>irrelevant</td>
-                    <td>visual</td>
-                    <td>layout</td>
-                  </tr>
-                  <tr>
-                    <td>1,003</td>
-                    <td>data</td>
-                    <td>rich</td>
-                    <td>dashboard</td>
-                    <td>tabular</td>
-                  </tr>
-                  <tr>
-                    <td>1,003</td>
-                    <td>information</td>
-                    <td>placeholder</td>
-                    <td>illustrative</td>
-                    <td>data</td>
-                  </tr>
-                  <tr>
-                    <td>1,004</td>
-                    <td>text</td>
-                    <td>random</td>
-                    <td>layout</td>
-                    <td>dashboard</td>
-                  </tr>
-                  <tr>
-                    <td>1,005</td>
-                    <td>dashboard</td>
-                    <td>irrelevant</td>
-                    <td>text</td>
-                    <td>placeholder</td>
-                  </tr>
-                  <tr>
-                    <td>1,006</td>
-                    <td>dashboard</td>
-                    <td>illustrative</td>
-                    <td>rich</td>
-                    <td>data</td>
-                  </tr>
-                  <tr>
-                    <td>1,007</td>
-                    <td>placeholder</td>
-                    <td>tabular</td>
-                    <td>information</td>
-                    <td>irrelevant</td>
-                  </tr>
-                  <tr>
-                    <td>1,008</td>
-                    <td>random</td>
-                    <td>data</td>
-                    <td>placeholder</td>
-                    <td>text</td>
-                  </tr>
-                  <tr>
-                    <td>1,009</td>
-                    <td>placeholder</td>
-                    <td>irrelevant</td>
-                    <td>visual</td>
-                    <td>layout</td>
-                  </tr>
-                  <tr>
-                    <td>1,010</td>
-                    <td>data</td>
-                    <td>rich</td>
-                    <td>dashboard</td>
-                    <td>tabular</td>
-                  </tr>
-                  <tr>
-                    <td>1,011</td>
-                    <td>information</td>
-                    <td>placeholder</td>
-                    <td>illustrative</td>
-                    <td>data</td>
-                  </tr>
-                  <tr>
-                    <td>1,012</td>
-                    <td>text</td>
-                    <td>placeholder</td>
-                    <td>layout</td>
-                    <td>dashboard</td>
-                  </tr>
-                  <tr>
-                    <td>1,013</td>
-                    <td>dashboard</td>
-                    <td>irrelevant</td>
-                    <td>text</td>
-                    <td>visual</td>
-                  </tr>
-                  <tr>
-                    <td>1,014</td>
-                    <td>dashboard</td>
-                    <td>illustrative</td>
-                    <td>rich</td>
-                    <td>data</td>
-                  </tr>
-                  <tr>
-                    <td>1,015</td>
-                    <td>random</td>
-                    <td>tabular</td>
-                    <td>information</td>
-                    <td>text</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="row mt-5">
+              <div className="col-md-12 text-center">
+                <div className="site-block-27">
+                  <ul>
+                    <li><a href="#" style={{textDecoration: 'none'}}>&lt;</a></li>
+                    <li className="active"><span>1</span></li>
+                    <li><a href="#" style={{textDecoration: 'none'}}>2</a></li>
+                    <li><a href="#" style={{textDecoration: 'none'}}>3</a></li>
+                    <li><a href="#" style={{textDecoration: 'none'}}>4</a></li>
+                    <li><a href="#" style={{textDecoration: 'none'}}>5</a></li>
+                    <li><a href="#" style={{textDecoration: 'none'}}>&gt;</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>

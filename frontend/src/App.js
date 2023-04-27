@@ -36,6 +36,7 @@ import Footer from "./modules/common/components/Footer";
 import BottomBanners from "./modules/common/components/BottomBanners";
 import SingleItem from "./modules/items/components/SingleItem";
 import ItemStore from "./modules/items/components/ItemStore";
+import SellerSingleProduct from "./modules/items/components/SellerSingleProduct";
 import Cart from "./modules/cart/components/Cart";
 import CheckoutOrder from "./modules/orders/components/CheckoutOrder";
 import ThankYou from "./modules/common/components/ThankYou";
@@ -68,6 +69,7 @@ const App = () => {
           <Route element={<Footer />} />
           <Route path="/homebuyer" element={<HomeBuyer />} />
           <Route path="/store" element={<ItemStore />} />
+          <Route path="SellerSingleProduct" element={<SellerSingleProduct />} />
           <Route path="/single-item" element={<SingleItem />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckoutOrder />} />

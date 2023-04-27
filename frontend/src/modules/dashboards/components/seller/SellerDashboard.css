@@ -8,6 +8,11 @@
   vertical-align: text-bottom;
 }
 
+.dashboardContainer{
+  margin-top: -80px;
+  margin-left: 240px;
+}
+
 /*
  * Sidebar
  */
