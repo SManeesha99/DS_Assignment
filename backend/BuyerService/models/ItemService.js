@@ -5,12 +5,8 @@ const ItemSchema = new mongoose.Schema ({
     type: String,
     required : true
   },
-  type : {
+  quantity : {
     type:Number,
-    required: true
-  },
-  dose : {
-    type: String,
     required: true
   },
   sellerName : {
@@ -21,12 +17,9 @@ const ItemSchema = new mongoose.Schema ({
     type: String,
     required : true 
   },
-  desc : {
-    type: String,
-    // required: true
-  },
   status : {
     type: String,
+    default: "Available"
     // required: true
   },
   image : {

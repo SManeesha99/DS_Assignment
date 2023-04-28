@@ -3,9 +3,95 @@ import DashboardHeader from '../../common/components/DashboardHeader';
 import SellerSideNav from '../../common/components/SellerSideNav';
 import axios from 'axios';
 import Select from "react-select";
-// const Swal = require('sweetalert2');
+const Swal = require('sweetalert2');
 
 const AddItems = () => {
+
+    const [image, setImage] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [quantity, setQuantity] = React.useState("");
+    const [sellerName, setSellerName] = React.useState("");
+    const [price, setPrice] = React.useState("");
+    const [itemPalyload, setItemPalyload] = React.useState({
+        name: "",
+        quantity: "",
+        sellerName: "",
+        price: "",
+        image: "",
+
+    });
+
+    const onChangeInput = (e) => {
+        setItemPalyload({ 
+          ...itemPalyload, 
+          [e.target.name]: e.target.value
+         });
+    };
+
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        console.log(itemPalyload)
+        const res = await axios.post("http://localhost:5001/api/items/send",itemPalyload);
+        console.log(res);
+        Swal.fire({
+          title: "Success!",
+          text: "Iteam added successfully",
+          icon: 'success',
+          timer: 2000,
+          button: false,
+        }).then(()=>{
+          window.location.href = "/";
+        })       
+      } catch (err) {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.msg,
+          icon: 'warning',
+          timer: 2000,
+          button: false,
+        })
+      }
+    };
+
+    const handleImageChange = async e => {
+      e.preventDefault()
+      try {
+          const file = e.target.files[0]
+  
+          if (!file) return alert("File not exist.")
+  
+          if (file.size > 1024 * 1024) // 1mb
+              return alert("Size too large!")
+  
+          if (file.type !== 'image/jpeg' && file.type !== 'image/png') // 1mb
+              return alert("File format is incorrect.")
+  
+          let formData = new FormData()
+          formData.append('file', file)
+          formData.append('upload_preset', 'DS_Assignment')
+          formData.append('cloud_name', 'drao60sj6')
+  
+          // setLoading(true)
+          const res = await axios.post( "https://api.cloudinary.com/v1_1/drao60sj6/image/upload",
+          formData,
+          {
+            method: "post",
+            body: formData,
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          })
+          // setLoading(false)
+          setItemPalyload({
+            ...itemPalyload,
+            image: res.data.url,
+          });
+        } catch (err) {
+          console.log(err.response.data.msg);
+          
+        }
+ }
     
   return (
     <div>
@@ -22,26 +108,26 @@ const AddItems = () => {
                   <form>
                       <div class="mb-3">
                           <label class="form-label">Product Name</label>
-                          <input type="text" class="form-control" id='productName' required/>
+                          <input type="text" class="form-control" id='productName' name='name' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Quantity</label>
-                          <input type="text" class="form-control" id='dose' required/>
+                          <input type="text" class="form-control" id='quantity' name='quantity' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Seller Name</label>
-                          <input type="text" class="form-control" id='sellerName' required/>
+                          <input type="text" class="form-control" id='sellerName' name='sellerName' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Price</label>
-                          <input type="text" class="form-control" id='price' required/>
+                          <input type="text" class="form-control" id='price' name='price' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
                           <label for="formFile" class="form-label">Product Image</label>
-                          <input class="form-control" type="file" id="formFile" name='photo' />
+                          <input class="form-control" type="file" id="formFile" name='image' onChange={handleImageChange} />
                       </div>
                       
-                      <button type="submit" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary" onClick={(e)=> onSubmit(e)}>Add</button>
                   </form>
                 </div>
               </div>  
