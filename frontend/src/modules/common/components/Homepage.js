@@ -17,7 +17,7 @@ export default function Homepage() {
                   <h2 className="sub-title">Effective Medicine, New Medicine Everyday</h2>
                   <h1>Welcome To Thambapanni</h1>
                   <p>
-                    <NavLink to='/store' className="btn btn-primary px-5 py-3">Shop Now</NavLink>
+                    <a href="#products" className="btn btn-primary px-5 py-3">Shop Now</a>
                   </p>
                 </div>
               </div>
@@ -25,7 +25,7 @@ export default function Homepage() {
           </div>
         </div>
         <div className="site-section">
-          <div className="container">
+          <div className="container" id="products">
             <div className="row">
               <div className="title-section text-center col-12">
                 <h2 className="text-uppercase">Popular Products</h2>
@@ -67,7 +67,7 @@ export default function Homepage() {
             </div>
             <div className="row mt-5">
               <div className="col-12 text-center">
-                <a href="/store" className="btn btn-primary px-4 py-3">View All Products</a>
+                <a href="/selectlogin" className="btn btn-primary px-4 py-3">View All Products</a>
               </div>
             </div>
           </div>

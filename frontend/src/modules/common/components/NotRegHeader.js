@@ -24,9 +24,9 @@ export default function NotRegHeader() {
               <nav className="site-navigation text-right text-md-center" role="navigation">
                 <ul className="site-menu js-clone-nav d-none d-lg-block">
                   <li className="active"><NavLink to='/'>Home</NavLink></li>
-                  <li><NavLink to='/store'>Store</NavLink></li>
-                  <li><NavLink to='/about'>About</NavLink></li>
-                  <li><NavLink to='/contact'>Contact</NavLink></li>
+                  <li><NavLink to='/'>Store</NavLink></li>
+                  <li><NavLink to='/selectlogin'>About</NavLink></li>
+                  <li><NavLink to='/selectlogin'>Contact</NavLink></li>
                   <li><NavLink to='/selectlogin'>Sign In</NavLink></li>
                   <li><NavLink to='/selectregister'>Sign Up</NavLink></li>
                 </ul>
