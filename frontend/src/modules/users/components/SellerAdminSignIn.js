@@ -7,16 +7,15 @@ import NotRegHeader from '../../common/components/NotRegHeader';
 
 export default function SellerAdminSignIn() {
 
+    const [field] = useState("Seller");
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
     const navigate = useNavigate();
-
-
-                
+               
     const login = ()  => {
 
-        const loginUser = {email, password};
+        const loginUser = {email, password, field};
 
         axios.post(`http://localhost:5004/api/user/login`,loginUser).then((res)=>{
 

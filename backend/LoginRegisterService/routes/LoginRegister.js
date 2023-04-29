@@ -114,7 +114,7 @@ router.route("/update/:id").put(async(req,res)=>{
 
 router.post("/login", async (req, res) => {
    
-    const user = await UserRegstration.findOne({email:req.body.email, password:req.body.password});
+    const user = await UserRegstration.findOne({email:req.body.email, password:req.body.password, field:req.body.field});
     if (user){
 
         
