@@ -7,16 +7,15 @@ import NotRegHeader from '../../common/components/NotRegHeader';
 
 export default function LoginBuyer() {
 
+    const [field] = useState("Buyer");
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
     const navigate = useNavigate();
-
-
-                
+               
     const login = ()  => {
 
-        const loginUser = {email, password};
+        const loginUser = {email, password, field};
 
         axios.post(`http://localhost:5004/api/user/login`,loginUser).then((res)=>{
 
@@ -74,6 +73,10 @@ export default function LoginBuyer() {
                         <label>Password</label>
                         <input class="form-control" type={password} value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Your Password'/>
                     </div>
+                    {/* <div className='name'>
+                        <label>Field</label>
+                        <input class="form-control" type={field} value={field} onChange={e => setField(e.target.value)} placeholder='Enter Your Field'/>
+                    </div> */}
                 </div>
 
                 <button class='btn btn-primary'  onClick={(e)=>login()}>Login</button>
