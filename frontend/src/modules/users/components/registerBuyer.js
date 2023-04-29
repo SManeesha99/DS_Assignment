@@ -71,7 +71,7 @@ export default function RegisterBuyer() {
     <NotRegHeader/>
         <center>
         <div className='regArea'>
-            <h2>Register Now</h2>
+            <h2>Buyer Register</h2>
             <div className='regui'>
                 <div className='name'>
                     <div class='row fullname'>
