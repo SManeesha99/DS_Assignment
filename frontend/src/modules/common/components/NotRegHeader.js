@@ -33,13 +33,8 @@ export default function NotRegHeader() {
               </nav>
             </div>
             <div className="icons">
-              <a href="#" className="icons-btn d-inline-block js-search-open" style={{textDecoration: 'none'}}><span className="icon-search"></span></a>
-              <a href="/cart" className="icons-btn d-inline-block bag">
-                <span className="icon-shopping-cart"></span>
-                <span className="number">2</span>
-              </a>
-              <a href="#" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none" style={{textDecoration: 'none'}}><span
-                className="icon-menu"></span></a>
+              <a href="#" className="icons-btn d-inline-block js-search-open" style={{textDecoration: 'none'}}>
+                <span className="icon-search"></span></a>
 
             </div>
           </div>
