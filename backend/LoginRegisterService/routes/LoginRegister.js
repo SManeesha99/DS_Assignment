@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const UserRegstration = require('../models/LoginRegister');
 const jwt = require('jsonwebtoken');
-// import {getInstructor} from '../controllers/testController.js';
 
 // register User----------------------------
 
@@ -16,6 +15,7 @@ router.route("/add").post((req,res)=>{
     
 
     const newuser = new UserRegstration({
+
         firstName,
         lastName,
         mobileNumber,
@@ -24,8 +24,6 @@ router.route("/add").post((req,res)=>{
         password,
         status,
         registerAt:Date.now(),
-        // userRoleStatus,
-        // accountStatus,
         
     })
 
@@ -69,20 +67,19 @@ router.route("/delete/:id").delete(async (req, res) => {
 //get one-----------------------------
 
 
-router.get("/get/:id",(req,res)=>{
+router.get("/get/:id",async (req,res)=>{
 
     let userId = req.params.id;
-    
-    UserRegstration.findById(userId,(err,User)=>{
-        if(err){
-            return res.status(400).json({success:false, err});
-        }
 
-        return res.status(200).json({
-            success:true,
-            User
+    try{
+        const User = await UserRegstration.findById({_id:userId});
+        res.json({
+            msg:"User found",
+            data: User,
         });
-    });
+    }catch(err){
+        return res.status(500).json({message:err.message});
+    }
 });
 
 //update--------------------------------
@@ -137,9 +134,6 @@ router.post("/login", async (req, res) => {
     }
 
   });
-
-
-
 
 //---------------------------------------------
 
