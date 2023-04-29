@@ -27,6 +27,9 @@ connection.once("open",()=>{
     console.log("MongoDB Connected 🍀");
 });
 
+const user = require("./routes/LoginRegister"); //use this when implementing routes
+app.use("/api/user", user);
+
 
 app.listen(PORT,()=>{
     console.log(`LoginRegister Service is up and running on port ${PORT} ✨`);
