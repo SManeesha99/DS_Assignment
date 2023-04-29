@@ -35,7 +35,7 @@ export default function HeaderBuyer() {
                   <li><NavLink to='/about'>About</NavLink></li>
                   <li><NavLink to='/contact'>Contact</NavLink></li>
                   <li><NavLink to='/contact'>Profile</NavLink></li>
-                  <li><NavLink to='/'>Sign Out</NavLink></li>
+                  <li><NavLink to='/' onClick={localStorage.clear}>Sign Out</NavLink></li>
                 </ul>
               </nav>
             </div>

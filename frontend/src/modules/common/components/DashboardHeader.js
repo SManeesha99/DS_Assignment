@@ -11,7 +11,7 @@ export default function DashboardHeader() {
         <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" />
         <div className="navbar-nav">
           <div className="nav-item text-nowrap">
-            <a className="nav-link px-3" href="/">Sign out</a>
+            <a className="nav-link px-3" href="/" onClick={localStorage.clear}>Sign out</a>
           </div>
         </div>
       </header>
