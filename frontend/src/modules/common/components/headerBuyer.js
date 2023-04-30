@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 export default function HeaderBuyer() {
   return (
     <div>
-      <div className="site-navbar py-2">
+      <div className="site-navbar py-2 navbar-fixed-top">
         <div className="search-wrap">
           <div className="container">
             <a href="#" className="search-close js-search-close" style={{textDecoration: 'none'}}><span className="icon-close2"></span></a>

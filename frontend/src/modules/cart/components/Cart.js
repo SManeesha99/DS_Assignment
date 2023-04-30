@@ -42,7 +42,7 @@ export default function Cart() {
           <div className="container">
             <div className="row">
               <div className="col-md-12 mb-0">
-                <NavLink to="/homepage" style={{ textDecoration: "none" }}>
+                <NavLink to="/homebuyer" style={{ textDecoration: "none" }}>
                   Home
                 </NavLink>{" "}
                 <span className="mx-2 mb-0">/</span>

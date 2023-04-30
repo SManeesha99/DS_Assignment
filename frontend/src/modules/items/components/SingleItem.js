@@ -59,7 +59,7 @@ export default function SingleItem() {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-0">
-              <NavLink to="/homepage" style={{ textDecoration: "none" }}>
+              <NavLink to="/homebuyer" style={{ textDecoration: "none" }}>
                 Home
               </NavLink>{" "}
               <span className="mx-2 mb-0">/</span>{" "}
@@ -94,7 +94,7 @@ export default function SingleItem() {
                 dolore.
               </p>
               <p>
-                <del>$95.00</del>{" "}
+                <p>$95.00</p>{" "}
                 <strong className="text-primary h4">{price}</strong>
               </p>
               <div className="mb-5">
@@ -129,7 +129,10 @@ export default function SingleItem() {
               </div>
               <p>
                 <Link to="/cart">
-                  <button className="btn btn-success">Show Cart</button>
+                  <button className="btn btn-success mr-5">Show Cart</button>
+                </Link>
+                <Link to="#">
+                  <button className="btn btn-danger">Buy Now</button>
                 </Link>
               </p>
               <div className="mt-5">

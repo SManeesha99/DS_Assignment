@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import Footer from './Footer'
 import HeaderBuyer from './headerBuyer'
 import BottomBanners from './BottomBanners'
 import { NavLink } from 'react-router-dom'
 
 export default function Homepage() {
+
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [item, setItem] = React.useState([]);
+  useEffect(()=>{
+      const getAllItems = async () => {
+        await axios.get(`http://localhost:5001/api/items/`).then((res) => {
+          setItem(res.data);
+        console.log( res.data)
+        }).catch((err) => {
+            console.log(err.massage);
+        }) 
+    }
+    getAllItems();
+    },[])
+
+    console.log(item)
+
+    const filteredItem = item.filter((item) => {
+      return (
+        item.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+        item.price.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+      );
+  });
+  
+
+
   return (
     <div>
       <div className="site-wrap">
@@ -32,77 +59,18 @@ export default function Homepage() {
               </div>
             </div>
             <div className="row">
+            {filteredItem.map((item)=>
               <div className="col-sm-6 col-lg-4 text-center item mb-4">
                 <span className="tag">Sale</span>
-                <a href="/single-item"> <img src="./assets/images/product_01.png" alt="Image" /></a>
-                <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Bioderma</a></h3>
-                <p className="price"><del>95.00</del> &mdash; $55.00</p>
+                <a href="/single-item"> <img src={item.image} alt="Image" style={{ width:'300px', height:'auto' }}/></a>
+                <h3 className="text-dark"><a href="/single-item" style={{fontSize: '25px'}}>{item.name}</a></h3>
+                <p className="price">LKR. {item.price}</p>
               </div>
-              <div className="col-sm-6 col-lg-4 text-center item mb-4">
-                <a href="/single-item"> <img src="./assets/images/product_02.png" alt="Image" /></a>
-                <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Chanca Piedra</a></h3>
-                <p className="price">$70.00</p>
-              </div>
-              <div className="col-sm-6 col-lg-4 text-center item mb-4">
-                <a href="/single-item"> <img src="./assets/images/product_03.png" alt="Image" /></a>
-                <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Umcka Cold Care</a></h3>
-                <p className="price">$120.00</p>
-              </div>
-              <div className="col-sm-6 col-lg-4 text-center item mb-4">
-                <a href="/single-item"> <img src="./assets/images/product_04.png" alt="Image" /></a>
-                <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Cetyl Pure</a></h3>
-                <p className="price"><del>45.00</del> &mdash; $20.00</p>
-              </div>
-              <div className="col-sm-6 col-lg-4 text-center item mb-4">
-                <a href="/single-item"> <img src="./assets/images/product_05.png" alt="Image" /></a>
-                <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>CLA Core</a></h3>
-                <p className="price">$38.00</p>
-              </div>
-              <div className="col-sm-6 col-lg-4 text-center item mb-4">
-                <span className="tag">Sale</span>
-                <a href="/single-item"> <img src="./assets/images/product_06.png" alt="Image" /></a>
-                <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Poo Pourri</a></h3>
-                <p className="price"><del>$89</del> &mdash; $38.00</p>
-              </div>
+              )}
             </div>
             <div className="row mt-5">
               <div className="col-12 text-center">
                 <a href="/store" className="btn btn-primary px-4 py-3">View All Products</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="site-section bg-light">
-          <div className="container">
-            <div className="row">
-              <div className="title-section text-center col-12">
-                <h2 className="text-uppercase">New Products</h2>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 block-3 products-wrap">
-                <div className="nonloop-block-3 owl-carousel">
-                  <div className="text-center item mb-4">
-                    <a href="/single-item"> <img src="./assets/images/product_03.png" alt="Image" /></a>
-                    <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Umcka Cold Care</a></h3>
-                    <p className="price">$120.00</p>
-                  </div>
-                  <div className="text-center item mb-4">
-                    <a href="/single-item"> <img src="./assets/images/product_01.png" alt="Image" /></a>
-                    <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Umcka Cold Care</a></h3>
-                    <p className="price">$120.00</p>
-                  </div>
-                  <div className="text-center item mb-4">
-                    <a href="/single-item"> <img src="./assets/images/product_02.png" alt="Image" /></a>
-                    <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Umcka Cold Care</a></h3>
-                    <p className="price">$120.00</p>
-                  </div>
-                  <div className="text-center item mb-4">
-                    <a href="/single-item"> <img src="./assets/images/product_04.png" alt="Image" /></a>
-                    <h3 className="text-dark"><a href="/single-item" style={{textDecoration: 'none'}}>Umcka Cold Care</a></h3>
-                    <p className="price">$120.00</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
