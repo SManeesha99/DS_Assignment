@@ -5,6 +5,9 @@ import DashboardHeader from "../../../common/components/DashboardHeader"
 import SellerSideNav from '../../../common/components/SellerSideNav'
 
 export default function SellerDashboard() {
+
+  const id =localStorage.getItem("id");
+
   return (
     <div>
       <div className="site-wrap ">
