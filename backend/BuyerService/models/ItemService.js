@@ -6,14 +6,14 @@ const ItemSchema = new mongoose.Schema ({
     type: String,
     required: true
   },
-  // sellerFName : {
-  //   type: String,
-  //   required: true
-  // },
-  // sellerLName : {
-  //   type: String,
-  //   required: true
-  // },
+  sellerFName : {
+    type: String,
+    required: true
+  },
+  sellerLName : {
+    type: String,
+    required: true
+  },
   name : {
     type: String,
     required : true
