@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardHeader from '../../common/components/DashboardHeader';
 import SellerSideNav from '../../common/components/SellerSideNav';
 import axios from 'axios';
@@ -7,26 +7,55 @@ const Swal = require('sweetalert2');
 
 const AddItems = () => {
 
+    const id =localStorage.getItem("id");
+    const [user, setUser]=useState({});
     const [image, setImage] = React.useState("");
     const [name, setName] = React.useState("");
     const [quantity, setQuantity] = React.useState("");
     const [sellerName, setSellerName] = React.useState("");
     const [price, setPrice] = React.useState("");
-    const [itemPalyload, setItemPalyload] = React.useState({
-        name: "",
-        quantity: "",
-        sellerName: "",
-        price: "",
-        image: "",
 
-    });
+    const [itemPalyload, setItemPalyload ] = React.useState({
+
+      sellerID: id,
+      name: "",
+      description: "",
+      quantity: "",
+      price: "",
+      image: "",
+  
+  });
 
     const onChangeInput = (e) => {
-        setItemPalyload({ 
-          ...itemPalyload, 
-          [e.target.name]: e.target.value
-         });
-    };
+      setItemPalyload({ 
+        ...itemPalyload, 
+        [e.target.name]: e.target.value
+       });
+  };
+
+
+    const onUserId =  (e) => {
+      let combinedValues = e.target.value;
+       let valuesArray = combinedValues.split("|");
+       setItemPalyload({
+         ...itemPalyload,
+         sellerID:valuesArray[0],
+         sellerFName:valuesArray[1],
+       });
+   
+   };
+
+  useEffect(()=>{
+    const getUser= async () => {
+      await axios.get(`http://localhost:5004/api/user/get/${id}`).then((res) => {
+          console.log(res.data);
+          setUser(res.data.data);
+      }).catch((err) => {
+          console.log(err.massage);
+      })
+  }
+  getUser();
+  },[id])
 
     const onSubmit = async (e) => {
       e.preventDefault();
@@ -111,12 +140,12 @@ const AddItems = () => {
                           <input type="text" class="form-control" id='productName' name='name' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
-                          <label class="form-label">Quantity</label>
-                          <input type="text" class="form-control" id='quantity' name='quantity' onChange={(e) => onChangeInput(e)} required/>
+                          <label class="form-label">Description</label>
+                          <textarea type="text" class="form-control" id='description' name='description' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
-                          <label class="form-label">Seller Name</label>
-                          <input type="text" class="form-control" id='sellerName' name='sellerName' onChange={(e) => onChangeInput(e)} required/>
+                          <label class="form-label">Quantity</label>
+                          <input type="text" class="form-control" id='quantity' name='quantity' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Price</label>

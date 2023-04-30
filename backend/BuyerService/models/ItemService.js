@@ -1,16 +1,29 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema ({
+  
+  sellerID : {
+    type: String,
+    required: true
+  },
+  // sellerFName : {
+  //   type: String,
+  //   required: true
+  // },
+  // sellerLName : {
+  //   type: String,
+  //   required: true
+  // },
   name : {
     type: String,
     required : true
   },
-  quantity : {
-    type:Number,
+  description : {
+    type:String,
     required: true
   },
-  sellerName : {
-    type: String,
+  quantity : {
+    type:Number,
     required: true
   },
   price : {
