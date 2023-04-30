@@ -37,18 +37,6 @@ const AddItems = () => {
        });
   };
 
-
-    const onUserId =  (e) => {
-      let combinedValues = e.target.value;
-       let valuesArray = combinedValues.split("|");
-       setItemPalyload({
-         ...itemPalyload,
-         sellerID:valuesArray[0],
-         sellerFName:valuesArray[1],
-       });
-   
-   };
-
   useEffect(()=>{
     const getUser= async () => {
       await axios.get(`http://localhost:5004/api/user/get/${id}`).then((res) => {
