@@ -8,6 +8,8 @@ const Swal = require('sweetalert2');
 const AddItems = () => {
 
     const id =localStorage.getItem("id");
+    const firstName =localStorage.getItem("firstName");
+    const lastName =localStorage.getItem("lastName");
     const [user, setUser]=useState({});
     const [image, setImage] = React.useState("");
     const [name, setName] = React.useState("");
@@ -18,6 +20,8 @@ const AddItems = () => {
     const [itemPalyload, setItemPalyload ] = React.useState({
 
       sellerID: id,
+      sellerFName: firstName,
+      sellerLName: lastName,
       name: "",
       description: "",
       quantity: "",

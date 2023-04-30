@@ -20,6 +20,8 @@ export default function SellerAdminSignIn() {
         axios.post(`http://localhost:5004/api/user/login`,loginUser).then((res)=>{
 
             localStorage.setItem("id",res.data.id);
+            localStorage.setItem("firstName",res.data.firstName);
+            localStorage.setItem("lastName",res.data.lastName);
 
             if(res.data.status){
                 swal({

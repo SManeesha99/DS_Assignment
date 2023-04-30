@@ -123,6 +123,8 @@ router.post("/login", async (req, res) => {
         email:user.email,
         id:user._id,
         accesstoken: accessToken,
+        firstName:user.firstName,
+        lastName:user.lastName,
 
     };
 
