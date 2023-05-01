@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import Footer from './Footer'
 import HeaderBuyer from './headerBuyer'
@@ -21,7 +22,7 @@ export default function Homepage() {
     getAllItems();
     },[])
 
-    console.log(item)
+    // console.log(item)
 
     const filteredItem = item.filter((item) => {
       return (
@@ -62,8 +63,8 @@ export default function Homepage() {
             {filteredItem.map((item)=>
               <div className="col-sm-6 col-lg-4 text-center item mb-4">
                 <span className="tag">Sale</span>
-                <a href="/single-item"> <img src={item.image} alt="Image" style={{ width:'300px', height:'auto' }}/></a>
-                <h3 className="text-dark"><a href="/single-item" style={{fontSize: '25px'}}>{item.name}</a></h3>
+                <a href={`/single-item/${item._id}`}> <img src={item.image} alt="Image" style={{ width:'300px', height:'auto' }}/></a>
+                <h3 className="text-dark"><a href={`/single-item/${item._id}`} style={{fontSize: '25px'}}>{item.name}</a></h3>
                 <p className="price">LKR. {item.price}</p>
               </div>
               )}

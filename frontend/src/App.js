@@ -24,8 +24,17 @@
 
 // export default App;
 
+
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import './assets/fonts/icomoon/style.css';
+import './assets/css/bootstrap.min.css';
+import './assets/css/magnific-popup.css';
+//import './assets/css/jquery-ui.css';
+//import './assets/css/owl.carousel.min.css';
+import './assets/css/owl.theme.default.min.css';
+import './assets/css/aos.css';
+import './assets/css/style.css';
 import "./App.css";
 import BasicAuth from "./modules/common/components/BasicAuth";
 import Homepage from "./modules/common/components/Homepage.js";
@@ -69,7 +78,8 @@ const App = () => {
           <Route element={<Footer />} />
           <Route path="/homebuyer" element={<HomeBuyer />} />
           <Route path="/store" element={<ItemStore />} />
-          <Route path="SellerSingleProduct" element={<SellerSingleProduct />} />
+          <Route path="/SellerSingleProduct" element={<SellerSingleProduct />} />
+          <Route path="/single-item/:id" element={<SingleItem />} />
           <Route path="/single-item" element={<SingleItem />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckoutOrder />} />
