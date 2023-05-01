@@ -4,6 +4,8 @@ import axios from "axios";
 import DashboardHeader from '../../common/components/DashboardHeader';
 import SellerSideNav from '../../common/components/SellerSideNav';
 import { NavLink,Link,useParams } from 'react-router-dom'
+const Swal = require('sweetalert2')
+
 
 export default function SellerSingleProduct() {
 
@@ -21,6 +23,47 @@ useEffect(()=>{
 }
 getOneItems();
 },[])
+
+const deleteItem = async (itemID) => {
+  try{
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.value === true) {
+            const res =  axios.delete(`http://localhost:5001/api/items/delete/${itemID}`).then((res) => {
+              if (res) {
+                Swal.fire({
+                  title: "Success!",
+                  text: "Your file has been deleted",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500,
+                }).then(() => {
+                  window.location.href = "/seller-dashboard";
+                });
+              } else {
+                Swal.fire({
+                  title: "Error!",
+                  text: "Something went wrong",
+                  icon: "error",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+            });
+          }
+        });
+
+  }catch(err){
+      console.log(err.data.msg);
+  }
+}
 
   return (
     <div className="site-wrap">
@@ -58,9 +101,7 @@ getOneItems();
                 <Link to={`/updateitem/${item._id}`}>
                   <button className="btn btn-success mr-5">Update</button>
                 </Link>
-                <Link to="/updateitem/:id">
-                  <button className="btn btn-danger">Remove</button>
-                </Link>
+                  <button className="btn btn-danger" onClick={()=>deleteItem(item._id)} >Remove</button>
               </p>
             </div>
           </div>
