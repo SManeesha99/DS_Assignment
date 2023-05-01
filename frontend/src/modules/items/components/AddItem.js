@@ -133,7 +133,7 @@ const AddItems = () => {
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Description</label>
-                          <textarea type="text" class="form-control" id='description' name='description' onChange={(e) => onChangeInput(e)} required/>
+                          <textarea type="text" class="form-control" style={{ height: "150px" }} id='description' name='description' onChange={(e) => onChangeInput(e)} required/>
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Quantity</label>
