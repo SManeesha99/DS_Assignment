@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import Footer from './Footer'
 import HeaderBuyer from './headerBuyer'
-import BottomBanners from './BottomBanners'
 import { NavLink } from 'react-router-dom'
 
 export default function Homepage() {
