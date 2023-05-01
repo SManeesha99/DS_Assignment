@@ -43,8 +43,8 @@ export default function SellerDashboard() {
             <div className="row">
               {filteredItem.map((item)=>
               <div className="col-sm-6 col-lg-4 text-center item mb-4">
-                <a href="/SellerSingleProduct"> <img src={item.image} alt="Image" style={{ width:'250px', height:'250px' }}/></a>
-                <h3 className="text-dark"><a href={`/single-item/${item._id}`} style={{fontSize: '25px'}}>{item.name}</a></h3>
+                <a href={`/SellerSingleProduct/${item._id}`}> <img src={item.image} alt="Image" style={{ width:'250px', height:'250px' }}/></a>
+                <h3 className="text-dark"><a href={`/SellerSingleProduct/${item._id}`} style={{fontSize: '25px'}}>{item.name}</a></h3>
                 <p className="price">LKR. {item.price}</p>
               </div>
               )}
