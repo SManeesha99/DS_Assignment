@@ -62,7 +62,7 @@ const AddItems = () => {
           timer: 2000,
           button: false,
         }).then(()=>{
-          window.location.href = "/";
+          window.location.href = "/seller-dashboard";
         })       
       } catch (err) {
         Swal.fire({
@@ -141,7 +141,7 @@ const AddItems = () => {
                       </div>
                       <div class="mb-3">
                           <label class="form-label">Price</label>
-                          <input type="text" class="form-control" id='price' name='price' onChange={(e) => onChangeInput(e)} required/>
+                          <input type="text" class="form-control" id='price' name='price' onChange={(e) => onChangeInput(e)} placeholder="0000.00"required/>
                       </div>
                       <div class="mb-3">
                           <label for="formFile" class="form-label">Product Image</label>
