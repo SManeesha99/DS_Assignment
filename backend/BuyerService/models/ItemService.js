@@ -32,7 +32,7 @@ const ItemSchema = new mongoose.Schema ({
   },
   status : {
     type: String,
-    default: "Available"
+    default: "In Stock"
     // required: true
   },
   image : {

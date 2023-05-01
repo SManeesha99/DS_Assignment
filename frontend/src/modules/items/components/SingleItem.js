@@ -1,41 +1,38 @@
-import React from "react";
+
 import Header from "../../common/components/headerBuyer";
-import BottomBanners from "../../common/components/BottomBanners";
 import Footer from "../../common/components/Footer";
-import { NavLink } from "react-router-dom";
+import { NavLink,useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function SingleItem() {
   const [item, setItem] = useState({});
+  const params=useParams();
+  const itemID=params.id;
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5003/api/items/643d98c2c9a67683ed32564d`) //this endpoint need to check. good practice is use the api endpoint as const.
-      .then((response) => {
-        setItem(response.data);
-        // console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+useEffect(()=>{
+  const getOneItems = async () => {
+    await axios.get(`http://localhost:5001/api/items/${itemID}`).then((res) => {
+      setItem(res.data);
+    }).catch((err) => {
+        console.log(err.massage);
+    }) 
+}
+getOneItems();
+},[])
 
-  useEffect(() => {
-    console.log(item);
-  }, [item]);
-
-  const { _id, name, type, dose, sellerName, price, desc, status, image } =
+  const { _id, name, sellerFname, dose, sellerName, price, desc, status, image } =
     item;
 
   const newObj = {
     oldid: _id,
+    nameF: sellerFname,
     ItemName: name,
     Itemprice: price,
     image:image
   };
-  console.log(newObj);
+  // console.log(newObj);
 
   const addToCart = async () => {
     axios
@@ -63,11 +60,11 @@ export default function SingleItem() {
                 Home
               </NavLink>{" "}
               <span className="mx-2 mb-0">/</span>{" "}
-              <a href="shop.html" style={{ textDecoration: "none" }}>
+              <a href="/store" style={{ textDecoration: "none" }}>
                 Store
               </a>{" "}
               <span className="mx-2 mb-0">/</span>{" "}
-              <strong className="text-black">Ibuprofen Tablets, 200mg</strong>
+              <strong className="text-black">{item.name}</strong>
             </div>
           </div>
         </div>
@@ -78,24 +75,18 @@ export default function SingleItem() {
             <div className="col-md-5 mr-auto">
               <div className="border text-center">
                 <img
-                  src={image}
+                  src={item.image}
                   alt="Image"
                   className="img-fluid p-5"
                 />
               </div>
             </div>
             <div className="col-md-6">
-              <h2 className="text-black">{name}</h2>
+              <h2 className="text-black">{item.name}</h2>
+              <p> Seller: {item.sellerFName} {item.sellerLName} </p>
+              <p> {item.description} </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur, vitae, explicabo? Incidunt facere, natus soluta
-                dolores iusto! Molestiae expedita veritatis nesciunt doloremque
-                sint asperiores fuga voluptas, distinctio, aperiam, ratione
-                dolore.
-              </p>
-              <p>
-                <p>$95.00</p>{" "}
-                <strong className="text-primary h4">{price}</strong>
+                <strong className="text-primary h4">LKR. {item.price}</strong>
               </p>
               <div className="mb-5">
                 <div className="input-group mb-3" style={{ maxWidth: "220px" }}>
@@ -154,19 +145,6 @@ export default function SingleItem() {
                       Ordering Information
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      id="pills-profile-tab"
-                      data-toggle="pill"
-                      href="#pills-profile"
-                      role="tab"
-                      aria-controls="pills-profile"
-                      aria-selected="false"
-                    >
-                      Specifications
-                    </a>
-                  </li>
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
                   <div
@@ -177,45 +155,17 @@ export default function SingleItem() {
                   >
                     <table className="table custom-table">
                       <thead>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>status</th>
-                        <th>price</th>
+                        <th><center>Product Name</center></th> 
+                        <th><center>Status</center></th>
+                        <th><center>Available Quantity</center></th>
+                        <th><center>Price</center></th>
                       </thead>
                       <tbody>
                         <tr>
-                          {/* <th scope="row">OTC022401</th> */}
-                          <td>{name}</td>
-                          <td>{desc}</td>
-                          <td>{status}</td>
-                          <td>{price}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="pills-profile"
-                    role="tabpanel"
-                    aria-labelledby="pills-profile-tab"
-                  >
-                    <table className="table custom-table">
-                      <tbody>
-                        <tr>
-                          <td>HPIS CODE</td>
-                          <td className="bg-light">999_200_40_0</td>
-                        </tr>
-                        <tr>
-                          <td>HEALTHCARE PROVIDERS ONLY</td>
-                          <td className="bg-light">No</td>
-                        </tr>
-                        <tr>
-                          <td>LATEX FREE</td>
-                          <td className="bg-light">Yes, No</td>
-                        </tr>
-                        <tr>
-                          <td>MEDICATION ROUTE</td>
-                          <td className="bg-light">Topical</td>
+                          <td><center>{item.name}</center></td>
+                          <td><center>{item.status}</center></td>
+                          <td><center>{item.quantity}</center></td>
+                          <td><center>LKR. {item.price}</center></td>
                         </tr>
                       </tbody>
                     </table>
@@ -226,7 +176,6 @@ export default function SingleItem() {
           </div>
         </div>
       </div>
-      <BottomBanners />
       <Footer />
     </div>
   );
