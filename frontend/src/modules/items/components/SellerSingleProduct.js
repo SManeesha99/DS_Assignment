@@ -48,12 +48,14 @@ getOneItems();
             <h2 className="text-black">{item.name}</h2>
               <p>
               <p> {item.description} </p>
+              <p> Status: {item.status} </p>
+              <p> Available Quantity: {item.quantity} </p>
               </p>
               <p>
                 <strong className="text-primary h4">LKR. {item.price}</strong>
               </p>
               <p>
-                <Link to="/updateitem/:id">
+                <Link to={`/updateitem/${item._id}`}>
                   <button className="btn btn-success mr-5">Update</button>
                 </Link>
                 <Link to="/updateitem/:id">
