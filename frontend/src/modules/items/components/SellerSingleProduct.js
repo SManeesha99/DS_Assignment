@@ -1,9 +1,27 @@
 import React from 'react'
+import { useState, useEffect } from "react";
+import axios from "axios";
 import DashboardHeader from '../../common/components/DashboardHeader';
 import SellerSideNav from '../../common/components/SellerSideNav';
-import { NavLink,Link } from 'react-router-dom'
+import { NavLink,Link,useParams } from 'react-router-dom'
 
 export default function SellerSingleProduct() {
+
+  const [item, setItem] = useState({});
+  const params=useParams();
+  const itemID=params.id;
+
+useEffect(()=>{
+  const getOneItems = async () => {
+    await axios.get(`http://localhost:5001/api/items/${itemID}`).then((res) => {
+      setItem(res.data);
+    }).catch((err) => {
+        console.log(err.massage);
+    }) 
+}
+getOneItems();
+},[])
+
   return (
     <div className="site-wrap">
        <DashboardHeader />
@@ -20,24 +38,19 @@ export default function SellerSingleProduct() {
             <div className="col-md-5 mr-auto">
               <div className="border text-center">
                 <img
-                  src=""
+                  src={item.image}
                   alt="Image"
                   className="img-fluid p-5"
                 />
               </div>
             </div>
             <div className="col-md-6">
-              <h2 className="text-black"></h2>
+            <h2 className="text-black">{item.name}</h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur, vitae, explicabo? Incidunt facere, natus soluta
-                dolores iusto! Molestiae expedita veritatis nesciunt doloremque
-                sint asperiores fuga voluptas, distinctio, aperiam, ratione
-                dolore.
+              <p> {item.description} </p>
               </p>
               <p>
-                <p>$95.00</p>{" "}
-                <strong className="text-primary h4"></strong>
+                <strong className="text-primary h4">LKR. {item.price}</strong>
               </p>
               <p>
                 <Link to="/updateitem/:id">
