@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Swal = require('sweetalert2');
 
 export default function SingleItem() {
+  const id =localStorage.getItem("id");
   const [item, setItem] = useState({});
   const params=useParams();
   const itemID=params.id;
@@ -25,6 +26,7 @@ getOneItems();
   const { _id, name, description, price, image } = item;
 
   const newObj = {
+    BuyerID: id,
     ItemID: _id,
     ItemName: name,
     ItemDescription: description,
@@ -56,10 +58,6 @@ getOneItems();
           button: false,
         })
       });
-  };
-
-  const deleteFromCart = async () => {
-    await axios.delete("/api/items").then((res) => {});
   };
 
   return (

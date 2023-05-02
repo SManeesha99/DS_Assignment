@@ -6,31 +6,53 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Cart() {
-  const [data, setData] = useState([]);
+  const id =localStorage.getItem("id");
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [cart, setCart] = React.useState([]);
 
-  useEffect(() => {
-    axios
-      .get("/api/cart/all")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  useEffect(()=>{
+    const getOwnCart = async () => {
+      await axios.get(`http://localhost:5002/Cart/owncart/${localStorage.getItem("id")}`).then((res) => {
+        setCart(res.data);
+      }).catch((err) => {
+          console.log(err.massage);
+      }) 
+  }
+  getOwnCart();
+  },[])
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const filteredItem = cart.filter((cart) => {
+    return (
+      cart.ItemName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+      cart.ItemPrice.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
+});
 
-  let sum = 0;
-  const calculatePrice = () => {
-    for (let i = 0; i < data.length; i++) {
-      sum += data[i].Itemprice;
-      console.log(sum);
-    }
-  };
-  calculatePrice();
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/cart/all")
+  //     .then((response) => {
+  //       setData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
+
+  // let sum = 0;
+  // const calculatePrice = () => {
+  //   for (let i = 0; i < data.length; i++) {
+  //     sum += data[i].Itemprice;
+  //     console.log(sum);
+  //   }
+  // };
+  // calculatePrice();
 
   
   return (
@@ -58,39 +80,32 @@ export default function Cart() {
                   <table className="table table-bordered">
                     <thead>
                       <tr>
-                        <th className="product-thumbnail">Image</th>
-                        <th className="product-name">Product</th>
+                        <th className="product-thumbnail">Item Image</th>
+                        <th className="product-name">Item Name</th>
                         <th className="product-price">Price</th>
-                        <th className="product-total">Total</th>
                         <th className="product-remove">Remove</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {data.map((i) => (
-                        <tr key={i._id}>
+                    {filteredItem.map((cart)=>
+                        <tr>
                           <td className="product-thumbnail">
                             <img
-                              src={i.image}
+                              src={cart.ItemImage}
+                              style={{ width:'100px', height:'100px' }}
                               alt="Image"
                               className="img-fluid"
                             />
                           </td>
                           <td className="product-name">
-                            <h2 className="h5 text-black">{i.ItemName}</h2>
+                            <h2 className="h5 text-black">{cart.ItemName}</h2>
                           </td>
-                          <td>{i.Itemprice}</td>
-                          
-                          <td>$49.00</td>
+                          <td>LKR. {cart.ItemPrice}</td>
                           <td>
-                            <a
-                              href="#"
-                              className="btn btn-primary height-auto btn-sm"
-                            >
-                              X
-                            </a>
+                            <a href="#" className="icons-btn d-inline-block bag"><span className="icon-delete" style={{ fontSize:'30px'}}></span></a>
                           </td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -147,7 +162,7 @@ export default function Cart() {
                         <span className="text-black">Subtotal</span>
                       </div>
                       <div className="col-md-6 text-right">
-                        <strong className="text-black">{sum}</strong>
+                        <strong className="text-black"></strong>
                       </div>
                     </div>
                     <div className="row mb-5">
@@ -155,7 +170,7 @@ export default function Cart() {
                         <span className="text-black">Total</span>
                       </div>
                       <div className="col-md-6 text-right">
-                        <strong className="text-black">{sum}</strong>
+                        <strong className="text-black"></strong>
                       </div>
                     </div>
                     <div className="row">
