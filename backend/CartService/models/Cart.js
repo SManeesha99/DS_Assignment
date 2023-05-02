@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const CartSchema = new mongoose.Schema({
-  oldid: {
+  ItemID: {
     type: String,
     required: true
   },
@@ -9,13 +9,17 @@ const CartSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  Itemprice: {
-    type: Number,
+  ItemDescription: {
+    type: String,
     required: true
   },
-  image: {
+  ItemPrice: {
     type: String,
-    // required: true
+    required: true
+  },
+  ItemImage: {
+    type: String,
+    required: true
   }
 });
 

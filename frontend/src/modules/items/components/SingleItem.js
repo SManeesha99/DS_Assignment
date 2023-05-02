@@ -1,10 +1,10 @@
-
 import Header from "../../common/components/headerBuyer";
 import Footer from "../../common/components/Footer";
 import { NavLink,useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+const Swal = require('sweetalert2');
 
 export default function SingleItem() {
   const [item, setItem] = useState({});
@@ -22,26 +22,39 @@ useEffect(()=>{
 getOneItems();
 },[])
 
-  const { _id, name, sellerFname, dose, sellerName, price, desc, status, image } =
-    item;
+  const { _id, name, description, price, image } = item;
 
   const newObj = {
-    oldid: _id,
-    nameF: sellerFname,
+    ItemID: _id,
     ItemName: name,
-    Itemprice: price,
-    image:image
+    ItemDescription: description,
+    ItemPrice: price,
+    ItemImage:image
   };
-  // console.log(newObj);
 
   const addToCart = async () => {
     axios
-      .post("/api/cart/send", newObj)
+      .post("http://localhost:5002/Cart/send", newObj)
       .then((response) => {
         console.log(response);
+        Swal.fire({
+          title: "Success!",
+          text: "Iteam added to cart",
+          icon: 'success',
+          timer: 2000,
+          button: false,
+        }).then(()=>{
+          window.location.href = "/cart";
+        })       
       })
       .catch((error) => {
-        console.error(error);
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.msg,
+          icon: 'warning',
+          timer: 2000,
+          button: false,
+        })
       });
   };
 
@@ -90,7 +103,7 @@ getOneItems();
               </p>
               <div className="mb-5">
                 <div className="input-group mb-3" style={{ maxWidth: "220px" }}>
-                  <div className="input-group-prepend">
+                  {/* <div className="input-group-prepend">
                     <button
                       className="btn btn-outline-primary js-btn-minus"
                       type="button"
@@ -98,23 +111,21 @@ getOneItems();
                     >
                       &minus;
                     </button>
-                  </div>
-                  <input
+                  </div> */}
+                  {/* <input
                     type="text"
                     className="form-control text-center"
                     value="1"
                     placeholder=""
                     aria-label="Example text with button addon"
                     aria-describedby="button-addon1"
-                  />
+                  /> */}
                   <div className="input-group-append">
                     <button
-                      className="btn btn-outline-primary js-btn-plus"
+                      className="btn btn-outline-primary"
                       type="button"
                       onClick={addToCart}
-                    >
-                      +
-                    </button>
+                    > Add to cart </button>
                   </div>
                 </div>
               </div>
