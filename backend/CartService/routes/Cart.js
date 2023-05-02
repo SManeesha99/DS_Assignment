@@ -58,4 +58,19 @@ router.delete("/:id", (req, res) => {
     .catch((err) => res.status(404).json({ error: "No such a item" }));
 });
 
+// @route DELETE api/items/:id
+// @description Delete item by id
+// @access Public
+router.route("/owncart/:id").get((req,res)=>{
+
+  const id = req.params.id;
+
+  Cart.find({BuyerID:id}).then((cart)=>{
+      res.json(cart)
+  }).catch((err)=>{
+      console.log(err)
+  })
+
+})
+
 module.exports = router;
