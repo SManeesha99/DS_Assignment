@@ -4,6 +4,7 @@ import Footer from "../../common/components/Footer";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+const Swal = require('sweetalert2')
 
 export default function Cart() {
   const id =localStorage.getItem("id");
@@ -26,7 +27,48 @@ export default function Cart() {
       cart.ItemName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
       cart.ItemPrice.toLowerCase().includes(searchTerm.toLocaleLowerCase())
     );
-});
+});const deleteItem = async (_id) => {
+  try{
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.value === true) {
+            const res =  axios.delete(`http://localhost:5002/Cart/delete/${_id}`).then((res) => {
+              if (res) {
+                Swal.fire({
+                  title: "Success!",
+                  text: "Your file has been deleted",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500,
+                }).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  title: "Error!",
+                  text: "Something went wrong",
+                  icon: "error",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+            });
+          }
+        });
+
+  }catch(err){
+      console.log(err.data.msg);
+  }
+}
+
+
 
   // const [data, setData] = useState([]);
 
@@ -102,7 +144,7 @@ export default function Cart() {
                           </td>
                           <td>LKR. {cart.ItemPrice}</td>
                           <td>
-                            <a href="#" className="icons-btn d-inline-block bag"><span className="icon-delete" style={{ fontSize:'30px'}}></span></a>
+                            <span className="icon-delete" onClick={()=>deleteItem(cart._id)} style={{ fontSize:'30px'}}></span>  
                           </td>
                         </tr>
                       )}
