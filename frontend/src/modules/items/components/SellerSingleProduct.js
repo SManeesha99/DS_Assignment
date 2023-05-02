@@ -76,7 +76,7 @@ const deleteItem = async (itemID) => {
         </div>
       </div>
       <div className="site-section">
-        <div className="container">
+        <div className="container mr-5">
           <div className="row">
             <div className="col-md-5 mr-auto">
               <div className="border text-center">
