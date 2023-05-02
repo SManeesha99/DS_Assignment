@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartService-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: DS_Assignment
+  template:
+    metadata:
+      labels:
+        app: DS_Assignment
+    spec:
+      containers:
+        - name: cartService
+          image: muld/DS_Assignment
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cartService-srv
+spec:
+  selector:
+    app: DS_Assignment
+  type: ClusterIP
+  ports:
+    - name: cartService
+      protocol: TCP
+      port: 5002
+      targetPort: 5002
