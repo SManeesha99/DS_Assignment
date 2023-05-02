@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from '../../common/components/headerBuyer'
-import BottomBanners from '../../common/components/BottomBanners'
 import Footer from '../../common/components/Footer'
 import { NavLink } from 'react-router-dom'
 
@@ -13,7 +12,7 @@ export default function CheckoutOrder() {
           <div className="container">
             <div className="row">
               <div className="col-md-12 mb-0">
-                <NavLink to='/homepage' style={{ textDecoration: 'none' }}>Home</NavLink> <span className="mx-2 mb-0">/</span>
+                <NavLink to='/homebuyer' style={{ textDecoration: 'none' }}>Home</NavLink> <span className="mx-2 mb-0">/</span>
                 <strong className="text-black">Checkout</strong>
               </div>
             </div>
@@ -21,13 +20,6 @@ export default function CheckoutOrder() {
         </div>
         <div className="site-section">
           <div className="container">
-            <div className="row mb-5">
-              <div className="col-md-12">
-                <div className="bg-light rounded p-3">
-                  <p className="mb-0">Returning customer? <a href="#" className="d-inline-block" style={{ textDecoration: 'none' }}>Click here</a> to login</p>
-                </div>
-              </div>
-            </div>
             <div className="row">
               <div className="col-md-6 mb-5 mb-md-0">
                 <h2 className="h3 mb-3 text-black">Billing Details</h2>
@@ -192,21 +184,6 @@ export default function CheckoutOrder() {
               <div className="col-md-6">
                 <div className="row mb-5">
                   <div className="col-md-12">
-                    <h2 className="h3 mb-3 text-black">Coupon Code</h2>
-                    <div className="p-3 p-lg-5 border">
-                      <label for="c_code" className="text-black mb-3">Enter your coupon code if you have one</label>
-                      <div className="input-group w-75">
-                        <input type="text" className="form-control" id="c_code" placeholder="Coupon Code" aria-label="Coupon Code"
-                          aria-describedby="button-addon2" />
-                        <div className="input-group-append">
-                          <button className="btn btn-primary btn-sm px-4" type="button" id="button-addon2">Apply</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row mb-5">
-                  <div className="col-md-12">
                     <h2 className="h3 mb-3 text-black">Your Order</h2>
                     <div className="p-3 p-lg-5 border">
                       <table className="table site-block-order-table mb-5">
@@ -275,7 +252,6 @@ export default function CheckoutOrder() {
             {/* </form> */}
           </div>
         </div>
-        <BottomBanners />
         <Footer />
       </div>
     </div>

@@ -156,36 +156,12 @@ export default function Cart() {
             <div className="row">
               <div className="col-md-6">
                 <div className="row mb-5">
-                  <div className="col-md-6 mb-3 mb-md-0">
-                    <button className="btn btn-primary btn-md btn-block">
-                      Update Cart
-                    </button>
-                  </div>
                   <div className="col-md-6">
+                  <NavLink to="/store" style={{ textDecoration: "none" }}>
                     <button className="btn btn-outline-primary btn-md btn-block">
                       Continue Shopping
                     </button>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <label className="text-black h4" for="coupon">
-                      Coupon
-                    </label>
-                    <p>Enter your coupon code if you have one.</p>
-                  </div>
-                  <div className="col-md-8 mb-3 mb-md-0">
-                    <input
-                      type="text"
-                      className="form-control py-3"
-                      id="coupon"
-                      placeholder="Coupon Code"
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <button className="btn btn-primary btn-md px-4">
-                      Apply Coupon
-                    </button>
+                    </NavLink>
                   </div>
                 </div>
               </div>
@@ -217,12 +193,11 @@ export default function Cart() {
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        <button
-                          className="btn btn-primary btn-lg btn-block"
-                          onclick="window.location='checkout.html'"
-                        >
+                      <NavLink to="/checkout" style={{ textDecoration: "none" }}>
+                        <button className="btn btn-primary btn-lg btn-block" >
                           Proceed To Checkout
                         </button>
+                        </NavLink>
                       </div>
                     </div>
                   </div>
