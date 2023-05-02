@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../common/components/headerBuyer";
-import BottomBanners from "../../common/components/BottomBanners";
 import Footer from "../../common/components/Footer";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -175,7 +174,6 @@ export default function Cart() {
             </div>
           </div>
         </div>
-        <BottomBanners />
         <Footer />
       </div>
     </div>
