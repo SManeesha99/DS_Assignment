@@ -27,7 +27,9 @@ export default function Cart() {
       cart.ItemName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
       cart.ItemPrice.toLowerCase().includes(searchTerm.toLocaleLowerCase())
     );
-});const deleteItem = async (_id) => {
+});
+
+const deleteItem = async (_id) => {
   try{
       Swal.fire({
           title: "Are you sure?",
@@ -168,7 +170,7 @@ export default function Cart() {
               <div className="col-md-6 pl-5">
                 <div className="row justify-content-end">
                   <div className="col-md-7">
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-md-12 text-right border-bottom mb-5">
                         <h3 className="text-black h4 text-uppercase">
                           Cart Totals
@@ -190,7 +192,7 @@ export default function Cart() {
                       <div className="col-md-6 text-right">
                         <strong className="text-black"></strong>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                       <div className="col-md-12">
                       <NavLink to="/checkout" style={{ textDecoration: "none" }}>

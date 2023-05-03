@@ -1,9 +1,96 @@
-import React from 'react'
+import React from "react";
+import { useEffect, useState } from 'react'
 import Header from '../../common/components/headerBuyer'
 import Footer from '../../common/components/Footer'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios';
+const Swal = require('sweetalert2');
 
 export default function CheckoutOrder() {
+
+  const id =localStorage.getItem("id");
+    const firstName =localStorage.getItem("firstName");
+    const lastName =localStorage.getItem("lastName");
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const [user, setUser]=useState({});
+    const [cart, setCart]=useState({});
+
+    const [orderPlayload, setOrderPlayload, ] = React.useState({
+
+      BuyerID: id,
+      buyerFName: firstName,
+      buyerLName: lastName,
+      Buyeraddress: "",
+      BuyerEmail: "",
+      BuyerMobile: "",
+      OrderNote: "",
+  
+  });
+
+  useEffect(()=>{
+    const getOwnCart = async () => {
+      await axios.get(`http://localhost:5002/Cart/owncart/${localStorage.getItem("id")}`).then((res) => {
+        setCart(res.data);
+      }).catch((err) => {
+          console.log(err.massage);
+      }) 
+  }
+  getOwnCart();
+  },[])
+
+//   const filteredItem = cart.filter((cart) => {
+//     return (
+//       cart.ItemName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+//       cart.ItemPrice.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+//     );
+// });
+
+
+    const onChangeInput = (e) => {
+      setOrderPlayload({ 
+        ...orderPlayload, 
+        [e.target.name]: e.target.value
+       });
+  };
+
+  useEffect(()=>{
+    const getUser= async () => {
+      await axios.get(`http://localhost:5004/api/user/get/${id}`).then((res) => {
+          console.log(res.data);
+          setUser(res.data.data);
+      }).catch((err) => {
+          console.log(err.massage);
+      })
+  }
+  getUser();
+  },[id])
+
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        console.log(orderPlayload)
+        const res = await axios.post("http://localhost:5005/api/Oder/send",orderPlayload);
+        console.log(res);
+        Swal.fire({
+          title: "Success!",
+          text: "Order added successfully",
+          icon: 'success',
+          timer: 2000,
+          button: false,
+        }).then(()=>{
+          window.location.reload();
+        })       
+      } catch (err) {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.msg,
+          icon: 'warning',
+          timer: 2000,
+          button: false,
+        })
+      }
+    };
+
   return (
     <div>
       <div className="site-wrap">
@@ -24,159 +111,38 @@ export default function CheckoutOrder() {
               <div className="col-md-6 mb-5 mb-md-0">
                 <h2 className="h3 mb-3 text-black">Billing Details</h2>
                 <div className="p-3 p-lg-5 border">
-                  <div className="form-group">
-                    <label for="c_country" className="text-black">Country <span className="text-danger">*</span></label>
-                    <select id="c_country" className="form-control">
-                      <option value="1">Select a country</option>
-                      <option value="2">bangladesh</option>
-                      <option value="3">Algeria</option>
-                      <option value="4">Afghanistan</option>
-                      <option value="5">Ghana</option>
-                      <option value="6">Albania</option>
-                      <option value="7">Bahrain</option>
-                      <option value="8">Colombia</option>
-                      <option value="9">Dominican Republic</option>
-                    </select>
-                  </div>
                   <div className="form-group row">
                     <div className="col-md-6">
-                      <label for="c_fname" className="text-black">First Name <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_fname" name="c_fname" />
+                      <label for="c_fname" className="text-black">First Name</label>
+                      <input type="text" className="form-control" id="c_fname" name="c_fname" value={user.firstName} readonly/>
                     </div>
                     <div className="col-md-6">
-                      <label for="c_lname" className="text-black">Last Name <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_lname" name="c_lname" />
-                    </div>
-                  </div>
-                  <div className="form-group row">
-                    <div className="col-md-12">
-                      <label for="c_companyname" className="text-black">Company Name </label>
-                      <input type="text" className="form-control" id="c_companyname" name="c_companyname" />
+                      <label for="c_lname" className="text-black">Last Name</label>
+                      <input type="text" className="form-control" id="c_lname" value={user.lastName} readonly name="c_lname" />
                     </div>
                   </div>
                   <div className="form-group row">
                     <div className="col-md-12">
                       <label for="c_address" className="text-black">Address <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_address" name="c_address" placeholder="Street address" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Apartment, suite, unit etc. (optional)" />
-                  </div>
-
-                  <div className="form-group row">
-                    <div className="col-md-6">
-                      <label for="c_state_country" className="text-black">State / Country <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_state_country" name="c_state_country" />
-                    </div>
-                    <div className="col-md-6">
-                      <label for="c_postal_zip" className="text-black">Posta / Zip <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_postal_zip" name="c_postal_zip" />
+                      <textarea name="Buyeraddress" id="c_address" cols="30" rows="5" className="form-control" onChange={(e) => onChangeInput(e)}
+                      placeholder="Enter Address"></textarea>
                     </div>
                   </div>
                   <div className="form-group row mb-5">
                     <div className="col-md-6">
                       <label for="c_email_address" className="text-black">Email Address <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_email_address" name="c_email_address" />
+                      <input type="text" className="form-control" id="c_email_address" name="BuyerEmail" onChange={(e) => onChangeInput(e)} placeholder="Enter Email" />
                     </div>
                     <div className="col-md-6">
                       <label for="c_phone" className="text-black">Phone <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="c_phone" name="c_phone" placeholder="Phone Number" />
+                      <input type="text" className="form-control" id="c_phone" name="BuyerMobile" placeholder="Phone Number" onChange={(e) => onChangeInput(e)} />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="c_create_account" className="text-black" data-toggle="collapse" href="#create_an_account"
-                      role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1"
-                        id="c_create_account" /> Create an account?</label>
-                    <div className="collapse" id="create_an_account">
-                      <div className="py-2">
-                        <p className="mb-3">Create an account by entering the information below. If you are a returning customer
-                          please login at the top of the page.</p>
-                        <div className="form-group">
-                          <label for="c_account_password" className="text-black">Account Password</label>
-                          <input type="email" className="form-control" id="c_account_password" name="c_account_password"
-                            placeholder="" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label for="c_ship_different_address" className="text-black" data-toggle="collapse"
-                      href="#ship_different_address" role="button" aria-expanded="false"
-                      aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address" />
-                      Ship To A Different Address?</label>
-                    <div className="collapse" id="ship_different_address">
-                      <div className="py-2">
-                        <div className="form-group">
-                          <label for="c_diff_country" className="text-black">Country <span className="text-danger">*</span></label>
-                          <select id="c_diff_country" className="form-control">
-                            <option value="1">Select a country</option>
-                            <option value="2">bangladesh</option>
-                            <option value="3">Algeria</option>
-                            <option value="4">Afghanistan</option>
-                            <option value="5">Ghana</option>
-                            <option value="6">Albania</option>
-                            <option value="7">Bahrain</option>
-                            <option value="8">Colombia</option>
-                            <option value="9">Dominican Republic</option>
-                          </select>
-                        </div>
-                        <div className="form-group row">
-                          <div className="col-md-6">
-                            <label for="c_diff_fname" className="text-black">First Name <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_fname" name="c_diff_fname" />
-                          </div>
-                          <div className="col-md-6">
-                            <label for="c_diff_lname" className="text-black">Last Name <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_lname" name="c_diff_lname" />
-                          </div>
-                        </div>
-                        <div className="form-group row">
-                          <div className="col-md-12">
-                            <label for="c_diff_companyname" className="text-black">Company Name </label>
-                            <input type="text" className="form-control" id="c_diff_companyname" name="c_diff_companyname" />
-                          </div>
-                        </div>
-                        <div className="form-group row">
-                          <div className="col-md-12">
-                            <label for="c_diff_address" className="text-black">Address <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_address" name="c_diff_address"
-                              placeholder="Street address" />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <input type="text" className="form-control" placeholder="Apartment, suite, unit etc. (optional)" />
-                        </div>
-                        <div className="form-group row">
-                          <div className="col-md-6">
-                            <label for="c_diff_state_country" className="text-black">State / Country <span
-                              className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_state_country" name="c_diff_state_country" />
-                          </div>
-                          <div className="col-md-6">
-                            <label for="c_diff_postal_zip" className="text-black">Posta / Zip <span
-                              className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_postal_zip" name="c_diff_postal_zip" />
-                          </div>
-                        </div>
-                        <div className="form-group row mb-5">
-                          <div className="col-md-6">
-                            <label for="c_diff_email_address" className="text-black">Email Address <span
-                              className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_email_address" name="c_diff_email_address" />
-                          </div>
-                          <div className="col-md-6">
-                            <label for="c_diff_phone" className="text-black">Phone <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="c_diff_phone" name="c_diff_phone"
-                              placeholder="Phone Number" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <div className="form-group">
                     <label for="c_order_notes" className="text-black">Order Notes</label>
-                    <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" className="form-control"
+                    <textarea name="OrderNote" id="c_order_notes" cols="30" rows="5" className="form-control" onChange={(e) => onChangeInput(e)}
                       placeholder="Write your notes here..."></textarea>
                   </div>
                 </div>
@@ -188,61 +154,24 @@ export default function CheckoutOrder() {
                     <div className="p-3 p-lg-5 border">
                       <table className="table site-block-order-table mb-5">
                         <thead>
-                          <th>Product</th>
-                          <th>Total</th>
+                          <th>Item Name</th>
+                          <th>Price</th>
                         </thead>
                         <tbody>
+                        {/* {filteredItem.map((cart)=> */}
                           <tr>
-                            <td>Bioderma <strong className="mx-2">x</strong> 1</td>
-                            <td>$55.00</td>
+                            <td>{cart.ItemName}</td>
+                            <td>LKR. {cart.ItemPrice}</td>
                           </tr>
-                          <tr>
-                            <td>Ibuprofeen <strong className="mx-2">x</strong> 1</td>
-                            <td>$45.00</td>
-                          </tr>
-                          <tr>
-                            <td className="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                            <td className="text-black">$350.00</td>
-                          </tr>
+                         {/* )} */}
                           <tr>
                             <td className="text-black font-weight-bold"><strong>Order Total</strong></td>
                             <td className="text-black font-weight-bold"><strong>$350.00</strong></td>
                           </tr>
                         </tbody>
                       </table>
-                      <div className="border mb-3">
-                        <h3 className="h6 mb-0"><a className="d-block" data-toggle="collapse" href="#collapsebank" role="button"
-                          aria-expanded="false" aria-controls="collapsebank" style={{textDecoration: 'none'}}>Direct Bank Transfer</a></h3>
-                        <div className="collapse" id="collapsebank">
-                          <div className="py-2 px-4">
-                            <p className="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
-                              payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="border mb-3">
-                        <h3 className="h6 mb-0"><a className="d-block" data-toggle="collapse" href="#collapsecheque" role="button"
-                          aria-expanded="false" aria-controls="collapsecheque" style={{textDecoration: 'none'}}>Cheque Payment</a></h3>
-                        <div className="collapse" id="collapsecheque">
-                          <div className="py-2 px-4">
-                            <p className="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
-                              payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="border mb-5">
-                        <h3 className="h6 mb-0"><a className="d-block" data-toggle="collapse" href="#collapsepaypal" role="button"
-                          aria-expanded="false" aria-controls="collapsepaypal" style={{textDecoration: 'none'}}>Paypal</a></h3>
-                        <div className="collapse" id="collapsepaypal">
-                          <div className="py-2 px-4">
-                            <p className="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
-                              payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                          </div>
-                        </div>
-                      </div>
                       <div className="form-group">
-                        <button className="btn btn-primary btn-lg btn-block" onClick="window.location='thankyou.html'">Place
-                          Order</button>
+                        <button className="btn btn-primary btn-lg btn-block" onClick={(e)=> onSubmit(e)} >Place Order</button>
                       </div>
                     </div>
                   </div>
