@@ -8,12 +8,12 @@ const Swal = require('sweetalert2');
 
 export default function CheckoutOrder() {
 
-  const id =localStorage.getItem("id");
+    const id =localStorage.getItem("id");
     const firstName =localStorage.getItem("firstName");
     const lastName =localStorage.getItem("lastName");
     const [searchTerm, setSearchTerm] = React.useState("");
     const [user, setUser]=useState({});
-    const [cart, setCart]=useState({});
+    const [cart, setCart]=useState([]);
 
     const [orderPlayload, setOrderPlayload, ] = React.useState({
 
@@ -24,13 +24,19 @@ export default function CheckoutOrder() {
       BuyerEmail: "",
       BuyerMobile: "",
       OrderNote: "",
-  
+      ItemIDs: [],
+      ItemPrices: [],
+      ItemNames: []
   });
 
   useEffect(()=>{
     const getOwnCart = async () => {
       await axios.get(`http://localhost:5002/Cart/owncart/${localStorage.getItem("id")}`).then((res) => {
         setCart(res.data);
+        const ids = res.data.map((c)=>c.ItemID);
+        const prices = res.data.map((c)=>c.ItemPrice);
+        const itemNames = res.data.map((c)=>c.ItemName);
+        setOrderPlayload({...orderPlayload, ItemIDs: ids, ItemPrices: prices, ItemNames: itemNames} )
       }).catch((err) => {
           console.log(err.massage);
       }) 
@@ -38,13 +44,12 @@ export default function CheckoutOrder() {
   getOwnCart();
   },[])
 
-//   const filteredItem = cart.filter((cart) => {
-//     return (
-//       cart.ItemName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-//       cart.ItemPrice.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-//     );
-// });
-
+  const filteredItem = cart.filter((cart) => {
+    return (
+      cart.ItemName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+      cart.ItemPrice.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
+});
 
     const onChangeInput = (e) => {
       setOrderPlayload({ 
@@ -90,6 +95,15 @@ export default function CheckoutOrder() {
         })
       }
     };
+
+  let sum = 0;
+  const calculatePrice = () => {
+    for (let i = 0; i < cart.length; i++) {
+      sum += cart[i].ItemPrice;
+      console.log(sum);
+    }
+  };
+  calculatePrice();
 
   return (
     <div>
@@ -158,15 +172,15 @@ export default function CheckoutOrder() {
                           <th>Price</th>
                         </thead>
                         <tbody>
-                        {/* {filteredItem.map((cart)=> */}
+                        {filteredItem.map((cart)=>
                           <tr>
                             <td>{cart.ItemName}</td>
-                            <td>LKR. {cart.ItemPrice}</td>
+                            <td>LKR. {cart.ItemPrice}.00</td>
                           </tr>
-                         {/* )} */}
+                        )} 
                           <tr>
                             <td className="text-black font-weight-bold"><strong>Order Total</strong></td>
-                            <td className="text-black font-weight-bold"><strong>$350.00</strong></td>
+                            <td className="text-black font-weight-bold"><strong>LKR. {sum}.00</strong></td>
                           </tr>
                         </tbody>
                       </table>
