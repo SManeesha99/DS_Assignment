@@ -29,22 +29,11 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // ItemID: {
-  //   type: String,
-  //   required: true,
-  // },
-  // ItemName: {
-  //   type: String,
-  //   required: true,
-  // },
-  // Itemprice: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // image: {
-  //   type: String,
-  //   required: true,
-  // }
+  ItemIDs: [String],
+
+  ItemPrices: [String],
+
+  ItemNames: [String]
 });
 
 module.exports = Order = mongoose.model("Order", OrderSchema);
