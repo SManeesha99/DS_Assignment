@@ -59,6 +59,7 @@ import LoginBuyer from "./modules/users/components/loginBuyer";
 import RegisterBuyer from "./modules/users/components/registerBuyer";
 import RegisterSeller from "./modules/users/components/registerSeller";
 import SellerDashboard from './modules/dashboards/components/seller/SellerDashboard';
+import SellerProfile from './modules/dashboards/components/seller/SellerProfile';
 import AdminDashboard from "./modules/dashboards/components/admin/AdminDashboard";
 import TrackOrder from "./modules/dashboards/components/admin/TrackOrder";
 import AddItems from "./modules/items/components/AddItem";
@@ -95,7 +96,8 @@ const App = () => {
           <Route path="/buyer-register" element={<RegisterBuyer />} />
           <Route path="/seller-register" element={<RegisterSeller />} />
           <Route path='/seller-dashboard' element={<SellerDashboard/>}/>
-          <Route path='/admin-dashboard' element={<AdminDashboard/>}/>
+          <Route path='/seller-dashboard' element={<SellerDashboard/>}/>
+          <Route path='/sellerprofile' element={<SellerProfile/>}/>
           <Route path='/track-order' element={<TrackOrder/>}/>
           <Route path='/additem' element={<AddItems/>}/>
           <Route path='/updateitem/:id' element={<UpdateItems/>}/>
