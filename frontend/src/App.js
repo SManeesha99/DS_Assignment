@@ -51,6 +51,7 @@ import CheckoutOrder from "./modules/orders/components/CheckoutOrder";
 import ThankYou from "./modules/common/components/ThankYou";
 import About from "./modules/common/components/About";
 import Contact from "./modules/common/components/Contact";
+import BuyerProfile from "./modules/common/components/BuyerProfile";
 import SellerAdminSignIn from "./modules/users/components/SellerAdminSignIn";
 import SelectLogin from "./modules/users/components/selectlogin";
 import SelectRegister from "./modules/users/components/selectregister";
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/buyerprofile" element={<BuyerProfile />} />
           <Route path="/selectlogin" element={<SelectLogin />} />
           <Route path="/selectregister" element={<SelectRegister />} />
           <Route path="/seller-login" element={<SellerAdminSignIn />} />
