@@ -26,9 +26,9 @@ export default function Footer() {
               <div className="block-5 mb-5">
                 <h3 className="footer-heading mb-4">Contact Info</h3>
                 <ul className="list-unstyled">
-                  <li className="address">203 Lane, Colombo 08, Sri Lanka</li>
-                  <li className="phone"><a href="tel://23923929210" style={{textDecoration: 'none'}}>+94 77 123 4567</a></li>
-                  <li className="email">emailaddress@domain.com</li>
+                  <li className="address">SLIIT Malabe, Kaduwela, Sri Lanka</li>
+                  <li className="phone"><a href="tel://23923929210" style={{textDecoration: 'none'}}>0112 224 448</a></li>
+                  <li className="email">thambapanni@gmail.com</li>
                 </ul>
               </div>
             </div>
@@ -36,11 +36,11 @@ export default function Footer() {
           <div className="row pt-5 mt-5 text-center">
             <div className="col-md-12">
               <p>
-                HerbAyur.com
+                Thambapanni.com
                 Copyright &copy;
-                <script>document.write(new Date().getFullYear());</script> All rights reserved | HerbAyur® is a
-                registered trademark of HerbAyur, LLC. Trusted Brands. Healthy Rewards. and the HerbAyur.com Trusted Brands.
-                Healthy Rewards. Logo are trademarks of HerbAyur, LLC.
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | Thambapanni is a
+                registered trademark of Thambapanni, LLC. Trusted Brands. Healthy Rewards. and the Thambapanni.com Trusted Brands.
+                Healthy Rewards. Logo are trademarks of Thambapanni, LLC.
               </p>
             </div>
           </div>
