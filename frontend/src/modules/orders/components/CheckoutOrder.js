@@ -23,10 +23,7 @@ export default function CheckoutOrder() {
       Buyeraddress: "",
       BuyerEmail: "",
       BuyerMobile: "",
-      OrderNote: "",
-      ItemIDs: [],
-      ItemPrices: [],
-      ItemNames: []
+      OrderNote: ""
   });
 
   useEffect(()=>{
@@ -34,9 +31,7 @@ export default function CheckoutOrder() {
       await axios.get(`http://localhost:5002/Cart/owncart/${localStorage.getItem("id")}`).then((res) => {
         setCart(res.data);
         const ids = res.data.map((c)=>c.ItemID);
-        const prices = res.data.map((c)=>c.ItemPrice);
-        const itemNames = res.data.map((c)=>c.ItemName);
-        setOrderPlayload({...orderPlayload, ItemIDs: ids, ItemPrices: prices, ItemNames: itemNames} )
+        setOrderPlayload({...orderPlayload, ItemIDs: ids} )
       }).catch((err) => {
           console.log(err.massage);
       }) 
@@ -78,7 +73,7 @@ export default function CheckoutOrder() {
         console.log(res);
         Swal.fire({
           title: "Success!",
-          text: "Order added successfully",
+          text: "Order Placed successfully",
           icon: 'success',
           timer: 2000,
           button: false,
