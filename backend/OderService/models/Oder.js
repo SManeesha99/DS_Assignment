@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {ObjectId} = mongoose.Schema.Types
 
 const OrderSchema = new mongoose.Schema({
   BuyerID: {
@@ -29,11 +30,11 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  ItemIDs: [String],
-
-  ItemPrices: [String],
-
-  ItemNames: [String]
+  ItemIDs: [{
+    type: ObjectId,
+    required: true,
+    ref: "item",
+  }]
 });
 
 module.exports = Order = mongoose.model("Order", OrderSchema);
