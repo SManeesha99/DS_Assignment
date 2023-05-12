@@ -7,7 +7,7 @@ export default function SellerSideNav() {
         <div className="position-sticky pt-3">
           <ul className="nav flex-column">
             <li className="nav-item">
-              <a className="nav-link active" href="#">
+              <a className="nav-link active" href="/sellerprofile">
                 <span data-feather="file"></span>
                 Profile
               </a>
